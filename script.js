@@ -8,7 +8,23 @@ const Node = (data, leftChild = null, rightChild = null) => {
 // FACTORY TO CREATE TREE
 const Tree = (array) => {
   let root = buildTree(array);
-  return root;
+
+  const insert = (root, value) => {
+    // duplicate
+    if (value === root.data) {
+      console.log("duplicate value cannot be added");
+      return;
+    } else if (root.left === null && root.right === null) {
+      // leaf node
+      value < root.data
+        ? (root.left = Node(value))
+        : (root.right = Node(value));
+      return;
+    }
+    value < root.data ? insert(root.left, value) : insert(root.right, value);
+  };
+
+  return { root, insert };
 };
 
 // BUILD TREE FROM SORTED ARRAY
@@ -46,5 +62,9 @@ array.sort(function (a, b) {
   return a - b;
 });
 
-console.log(Tree(array));
-prettyPrint(buildTree(array));
+const tree = Tree(array);
+prettyPrint(tree.root);
+console.log("insert value 10 in tree");
+tree.insert(tree.root, 10);
+
+prettyPrint(tree.root);
