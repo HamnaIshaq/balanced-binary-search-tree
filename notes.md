@@ -39,3 +39,40 @@ Reading the above algorithm, we will us recursion to go through the tree nodes u
 so base case is when we reach the leaf node
 
 - leaf node is identified by having no left or right child
+
+### delete a node from BST
+
+(Binary Search Trees (BSTs) - Insert and Remove Explained)[https://www.youtube.com/watch?v=wcIRPqTR3Kc]
+
+- to delete a node, we will encounter 3 cases
+
+1. to delete a leaf node
+
+   - compare the value with the root of BST
+     - if the value is less than the root, move to the left subtree
+     - if the value is greater than the root, move to the right subtree
+   - continue this process, until we hit the leaf node
+   - delete this leaf node
+   - keep track of the parent of leaf node
+
+2. delete a node that has 1 child
+
+   - compare the value with the root of BST
+     - if the value is less than the root, move to the left subtree
+     - if the value is greater than the root, move to the right subtree
+   - continue this process, until we hit the node we want to delete
+   - make the parent of this node point to the child of the node we want to delete
+   - delete the node
+
+3. delete a node that has 2 children
+
+   - compare the value with the root of BST
+     - if the value is less than the root, move to the left subtree
+     - if the value is greater than the root, move to the right subtree
+   - continue this process, until we hit the node we want to delete
+   - find the node that is just bigger than the node we want to delete
+     - go to the right subtree of the node we want to delete
+     - get the node at the far left of this right subtree
+     - remove this node from the far left of the right subtree
+     - replace the node we want to delete with this far left node
+   - delete the node
