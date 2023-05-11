@@ -74,7 +74,62 @@ const Tree = (array) => {
     return value < root.data ? find(root.left, value) : find(root.right, value);
   };
 
-  return { root, insert, deleteNode, find };
+  const levelOrder = (root, queueArr = [root], finalTraversedResult = []) => {
+    if (queueArr.length === 0) {
+      return finalTraversedResult;
+    } else if (queueArr.length !== 0) {
+      finalTraversedResult.push(root.data);
+      queueArr.shift();
+      if (root.left !== null) {
+        queueArr.push(root.left);
+      }
+      if (root.right !== null) {
+        queueArr.push(root.right);
+      }
+      return levelOrder(queueArr[0], queueArr, finalTraversedResult);
+    }
+  };
+
+  const inOrder = (root, finalTraversedResult = []) => {
+    if (root === null) {
+      return;
+    }
+    inOrder(root.left, finalTraversedResult);
+    finalTraversedResult.push(root.data);
+    inOrder(root.right, finalTraversedResult);
+    return finalTraversedResult;
+  };
+
+  const preOrder = (root, finalTraversedResult = []) => {
+    if (root === null) {
+      return;
+    }
+    finalTraversedResult.push(root.data);
+    preOrder(root.left, finalTraversedResult);
+    preOrder(root.right, finalTraversedResult);
+    return finalTraversedResult;
+  };
+
+  const postOrder = (root, finalTraversedResult = []) => {
+    if (root === null) {
+      return;
+    }
+    postOrder(root.left, finalTraversedResult);
+    postOrder(root.right, finalTraversedResult);
+    finalTraversedResult.push(root.data);
+    return finalTraversedResult;
+  };
+
+  return {
+    root,
+    insert,
+    deleteNode,
+    find,
+    levelOrder,
+    inOrder,
+    preOrder,
+    postOrder,
+  };
 };
 
 // BUILD TREE FROM SORTED ARRAY
@@ -121,6 +176,18 @@ prettyPrint(tree.root);
 console.log("find value 10 in tree");
 const foundNode = tree.find(tree.root, 9);
 prettyPrint(foundNode);
+
+const levelOrderTraversal = tree.levelOrder(tree.root);
+console.log(levelOrderTraversal);
+
+const inOrderTraversal = tree.inOrder(tree.root);
+console.log(inOrderTraversal);
+
+const preOrderTraversal = tree.preOrder(tree.root);
+console.log(preOrderTraversal);
+
+const postOrderTraversal = tree.postOrder(tree.root);
+console.log(postOrderTraversal);
 /*
 console.log("delete 8");
 tree.deleteNode(tree.root, tree.root, 8);
