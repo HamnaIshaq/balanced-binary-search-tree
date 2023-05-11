@@ -76,3 +76,24 @@ so base case is when we reach the leaf node
      - remove this node from the far left of the right subtree
      - replace the node we want to delete with this far left node
    - delete the node
+
+### breath-first level order traversal of BST
+
+breath-first traversal means we visit all the nodes at the same level first before moving on to the children nodes at next level
+
+- visit the root node
+- save the root node's children (first save left child and then right child) in a queue (or array)
+- print the root node value
+- take the first node stored in queue (or array)
+  - visit this root node
+  - save this root node's children (first save left child and then right child) in a queue (or array)
+  - print this root node value
+  - continue this process until the queue (or array) is empty
+
+### depth-first traversal of BST
+
+1. In order traversal (left, root, right)
+
+2. Pre-order traversal (root, left, right)
+
+3. Post-order traversal (left, right, root)
